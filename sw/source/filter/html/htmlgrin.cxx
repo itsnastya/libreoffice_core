@@ -586,6 +586,23 @@ IMAGE_SETEVENT:
     bool bSetScaleImageMap = false;
     sal_uInt8 nPrcWidth = 0, nPrcHeight = 0;
 
+    // bPrcWidth / bPrcHeight means we have a percent size.  If that's not the case and we have no
+    // size from nWidth / nHeight either, then inspect the image header.
+    if ((!bPrcWidth && !nWidth) && (!bPrcHeight && !nHeight) && allowAccessLink(*m_xDoc) &&
+        !aGraphicURL.IsExoticProtocol())
+    {
+        GraphicDescriptor aDescriptor(aGraphicURL);
+        if (aDescriptor.Detect(/*bExtendedInfo=*/true))
+        {
+            // Try to use size info from the image header before defaulting to
+            // HTML_DFLT_IMG_WIDTH/HEIGHT.
+            aTwipSz = Application::GetDefaultDevice()->PixelToLogic(aDescriptor.GetSizePixel(),
+                                                                    MapMode(MapUnit::MapTwip));
+            nWidth = aTwipSz.getWidth();
+            nHeight = aTwipSz.getHeight();
+        }
+    }
+
     if( !nWidth || !nHeight )
     {
         // When the graphic is in a table, it will be requested immediately,
