@@ -1304,10 +1304,10 @@ sal_uInt16 GraphicFilter::ImportGraphic( Graphic& rGraphic, const INetURLObject&
     if (rPath.IsExoticProtocol())
     {
         SAL_WARN("vcl.filter", "GraphicFilter::ImportGraphic(), ignore exotic protocol: " << aMainUrl);
-        return ERRCODE_GRFILTER_FORMATERROR;
+        return GRFILTER_FORMATERROR;
     }
 
-    ErrCode nRetValue = ERRCODE_GRFILTER_FORMATERROR;
+    ErrCode nRetValue = GRFILTER_FORMATERROR;
     std::unique_ptr<SvStream> xStream(::utl::UcbStreamHelper::CreateStream( aMainUrl, StreamMode::READ | StreamMode::SHARE_DENYNONE ));
     if (xStream)
     {

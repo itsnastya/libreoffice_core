@@ -52,6 +52,7 @@
 #include <comphelper/guarding.hxx>
 #include <comphelper/processfactory.hxx>
 #include <unotools/ucbstreamhelper.hxx>
+#include <unotools/securityoptions.hxx>
 #include <svl/urihelper.hxx>
 
 #include <memory>

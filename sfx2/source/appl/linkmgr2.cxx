@@ -497,19 +497,6 @@ bool LinkManager::GetGraphicFromAny( const OUString& rMimeType,
     css::uno::Sequence< sal_Int8 > aSeq;
     if( rValue.hasValue() && ( rValue >>= aSeq ) )
     {
-        OUString sURL = rValue.get<OUString>();
-        if (!SvtSecurityOptions().isUntrustedReferer(rReferer) &&
-            !INetURLObject(sURL).IsExoticProtocol())
-        {
-            rGraphic = vcl::graphic::loadFromURL(sURL, pParentWin);
-        }
-        if (rGraphic.IsNone())
-            rGraphic.SetDefaultType();
-        rGraphic.setOriginURL(sURL);
-        return true;
-    }
-    else if (rValue.has<css::uno::Sequence<sal_Int8>>())
-    {
         auto aSeq = rValue.get<css::uno::Sequence<sal_Int8>>();
 
         SvMemoryStream aMemStm( const_cast<sal_Int8 *>(aSeq.getConstArray()), aSeq.getLength(),

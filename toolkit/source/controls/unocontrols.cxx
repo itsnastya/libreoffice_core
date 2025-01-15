@@ -59,6 +59,7 @@
 #include <tools/diagnose_ex.h>
 #include <tools/date.hxx>
 #include <tools/time.hxx>
+#include <unotools/securityoptions.hxx>
 
 #include <algorithm>
 #include <functional>
