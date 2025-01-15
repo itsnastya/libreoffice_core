@@ -123,6 +123,7 @@ public:
     void testXAdES();
     /// Works with an existing good XAdES signature.
     void testXAdESGood();
+    void testInvalidZIP();
 
     CPPUNIT_TEST_SUITE(SigningTest);
     CPPUNIT_TEST(testDescription);
@@ -154,6 +155,7 @@ public:
     CPPUNIT_TEST(testXAdESNotype);
     CPPUNIT_TEST(testXAdES);
     CPPUNIT_TEST(testXAdESGood);
+    CPPUNIT_TEST(testInvalidZIP);
     CPPUNIT_TEST_SUITE_END();
 
 private:
@@ -910,7 +912,7 @@ void SigningTest::testXAdESGood()
          || nActual == SignatureState::OK));
 }
 
-CPPUNIT_TEST_FIXTURE(SigningTest, testInvalidZIP)
+void SigningTest::testInvalidZIP()
 {
 // set RepairPackage via interaction handler, same as soffice does
 // - if it's passed to load the behavior is different, oddly enough.
